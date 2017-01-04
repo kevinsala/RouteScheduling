@@ -1,12 +1,12 @@
 CXX=g++
 
 CPPFLAGS=
-CXXFLAGS=-O3 -lm
-LDFLAGS=
+CXXFLAGS=-O0 -g3 -std=c++11
+LDFLAGS=-lm
 
 all: routescheduling
 
-routescheduling: main.o
+routescheduling: Main.o
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o bin/$@ $(addprefix obj/,$^)
 
 %.o: src/%.cpp
