@@ -7,17 +7,19 @@
 #include <fstream>
 #include <iostream>
 
+#include "Utils.hpp"
+
 class InputData {
 
-	private:
+	public:
 
 		int nLocations;
 		int startLocation;
 
-		float *distance;
-		float *task;
-		float *minWindow;
-		float *maxWindow;
+		matrix<float> distance;
+		std::vector<float> task;
+		std::vector<float> minWindow;
+		std::vector<float> maxWindow;
 
 	public:
 		InputData()
@@ -45,10 +47,13 @@ class InputData {
 			in >> startLocation;
 
 			// Allocate memory to store the input
-			distance = (float *) malloc( nLocations * nLocations * sizeof(float) );
-			task = (float *) malloc( nLocations * sizeof(float) );
-			minWindow = (float *) malloc( nLocations * sizeof(float) );
-			maxWindow = (float *) malloc( nLocations * sizeof(float) );
+			distance.resize( nLocations );
+			for (int i = 0; i < nLocations; ++i)
+				distance[i].resize( nLocations );
+
+			task.resize( nLocations );
+			minWindow.resize( nLocations );
+			maxWindow.resize( nLocations );
 
 			// Get the matrix of distances
 			in >> token; assert(token == "distance");
@@ -57,7 +62,7 @@ class InputData {
 			for (int i = 0; i < nLocations; i++) {
 				in >> token; assert(token == "[");
 				for (int j = 0; j < nLocations; j++) {
-					in >> distance[i * nLocations + j];
+					in >> distance[i][j];
 				}
 				in >> token; assert(token == "]");
 			}

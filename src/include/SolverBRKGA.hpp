@@ -16,7 +16,7 @@ class SolverBRKGA : public Solver {
 		{
 		}
 
-		Solution solve( Configuration &config, Problem &problem, Decoder &decoder )
+		void solve( Configuration &config, Problem &problem, Solution &solution, Decoder &decoder )
 		{
 
 		}

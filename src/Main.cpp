@@ -27,26 +27,26 @@ int main(int argc, char * argv[])
 	inputData.load( config.inputDataFile );
 
 	Problem problem( inputData );
-	Solution solution;
+	Solution solution( problem );
 
 	if ( problem.checkInstance() ) {
 		if ( config.solver == "Greedy") {
 			SolverGreedy solver;
-			solution = solver.solve( config, problem );
+			solver.solve( config, problem, solution );
 		}
 		else if (config.solver == "GRASP") {
 			SolverGRASP solver;
-			solution = solver.solve( config, problem );
+			solver.solve( config, problem, solution );
 		}
 		else if (config.solver == "BRKGA") {
 			SolverBRKGA solver;
 			Decoder decoder( config, problem );
-			solution = solver.solve( config, problem, decoder );
+			solver.solve( config, problem, solution, decoder);
 		}
 	}
 	else {
 		std::cerr << "This instance is infeasible" << std::endl;
-		solution = Solution::createEmptySolution();
+		solution.makeEmpty();
 		solution.makeInfeasible();
 	}
 

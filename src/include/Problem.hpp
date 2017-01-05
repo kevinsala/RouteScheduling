@@ -8,7 +8,11 @@ class Problem {
 	private:
 
 	public:
-		Problem( InputData &inputData )
+		int nLocations;
+
+	public:
+		Problem( InputData &inputData ) :
+			nLocations( inputData.nLocations )
 		{
 		}
 
