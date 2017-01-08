@@ -1,6 +1,7 @@
 #ifndef DECODER_HPP
 #define DECODER_HPP
 
+// TODO: Decoder class
 class Decoder {
 
 	private:
@@ -8,7 +9,6 @@ class Decoder {
 	public:
 		Decoder( Configuration &config, Problem &problem )
 		{
-
 		}
 };
 

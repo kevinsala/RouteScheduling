@@ -16,9 +16,10 @@ class SolverBRKGA : public Solver {
 		{
 		}
 
-		void solve( Configuration &config, Problem &problem, Solution &solution, Decoder &decoder )
+		// TODO: SolverBRKGA::solve
+		Solution solve( Configuration &config, Problem &problem, Decoder &decoder )
 		{
-
+			return Solution( problem );
 		}
 };
 

@@ -1,7 +1,7 @@
 ; --- Common specific parameters ------------------------------------------------------------------------------
 inputDataFile			input.dat				; Input DAT file
-solutionFile			solutions/example.sol	; Output DAT file (solution)
-solver					BRKGA					; Supported solvers: Greedy / GRASP / BRKGA
+solutionFile			example.sol				; Output DAT file (solution)
+solver					GRASP					; Supported solvers: Greedy / GRASP / BRKGA
 maxExecTime				120						; Maximum execution time in seconds
 
 ; --- Greedy specific parameters ------------------------------------------------------------------------------

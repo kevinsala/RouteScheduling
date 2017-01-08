@@ -1,9 +1,10 @@
 #ifndef INPUT_DATA_HPP
 #define INPUT_DATA_HPP
 
-#include <cassert>
+#include <cmath>
 #include <vector>
 #include <string>
+#include <cassert>
 #include <fstream>
 #include <iostream>
 
@@ -54,9 +55,28 @@ class InputData {
 			task.resize( nLocations );
 			minWindow.resize( nLocations );
 			maxWindow.resize( nLocations );
+			matrix<int> p(nLocations, std::vector<int>(2, 0));
+
+			in >> token;
+			int fromPoints = 0;
+			if ( token == "fromPoints" ) {
+				in >> token; assert(token == "=");
+				in >> fromPoints;
+
+				in >> token; assert(token == "points");
+				in >> token; assert(token == "=");
+				in >> token; assert(token == "[");
+				for (int i = 0; i < nLocations; i++) {
+					in >> token; assert(token == "[");
+					in >> p[i][0] >> p[i][1];
+					in >> token; assert(token == "]");
+				}
+				in >> token; assert(token == "]");
+				in >> token;
+			}
 
 			// Get the matrix of distances
-			in >> token; assert(token == "distance");
+			assert(token == "distance");
 			in >> token; assert(token == "=");
 			in >> token; assert(token == "[");
 			for (int i = 0; i < nLocations; i++) {
@@ -94,6 +114,14 @@ class InputData {
 				in >> maxWindow[i];
 			}
 			in >> token; assert(token == "]");
+
+			if ( fromPoints ) {
+				for (int i = 0; i < nLocations; ++i) {
+					for (int j = 0; j < nLocations; ++j) {
+						distance[i][j] = sqrt(pow(p[i][0]-p[j][0],2) + pow(p[i][1]-p[j][1],2));
+					}
+				}
+			}
 
 			in.close();
 		}

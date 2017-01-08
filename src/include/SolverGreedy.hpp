@@ -15,9 +15,9 @@ class SolverGreedy : public Solver {
 		{
 		}
 
-		void solve( Configuration &config, Problem &problem, Solution &solution )
+		Solution solve( Configuration &config, Problem &problem )
 		{
-
+			return Solution( problem );
 		}
 };
 
