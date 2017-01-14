@@ -3,7 +3,6 @@
 
 #include <algorithm>
 #include <vector>
-#include <list>
 
 #include "InputData.hpp"
 #include "Location.hpp"
@@ -17,7 +16,7 @@ class Problem {
 		matrix<float> _distances;
 
 		Location _startLocation;
-		std::list<Location> _taskLocations;
+		std::vector<Location> _taskLocations;
 
 	public:
 		Problem( InputData &input ) :
@@ -38,6 +37,10 @@ class Problem {
 				if ( l != start )
 					_taskLocations.emplace_back( l, task[l], minWin[l], maxWin[l] );
 			}
+
+			// Sort task locations by minimum window in descending order
+			std::sort( _taskLocations.begin(), _taskLocations.end(),
+				Location::compareByMinWindowDescending );
 		}
 
 		bool checkFeasibility()
@@ -78,7 +81,7 @@ class Problem {
 			return _startLocation;
 		}
 
-		std::list<Location> getTaskLocationList()
+		std::vector<Location> &getTaskLocationsSortedByMinWindowDescending()
 		{
 			return _taskLocations;
 		}

@@ -1,6 +1,8 @@
 #ifndef ASSIGNMENT_HPP
 #define ASSIGNMENT_HPP
 
+#include <limits>
+
 class Assignment {
 
 	private:
@@ -10,6 +12,14 @@ class Assignment {
 		float _objFunction;
 
 	public:
+		Assignment() :
+			_targetLocation( -1 ),
+			_prevLocation( -1 ),
+			_nextLocation( -1 ),
+			_objFunction( std::numeric_limits<float>::infinity() )
+		{
+		}
+
 		Assignment( int targetLocation, int prevLocation, int nextLocation, float objFunction ) :
 			_targetLocation( targetLocation ),
 			_prevLocation( prevLocation ),

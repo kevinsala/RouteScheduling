@@ -1,7 +1,7 @@
 CXX=g++
 
 CPPFLAGS=
-CXXFLAGS=-O0 -g3 -std=c++11
+CXXFLAGS=-O3 -g0 -std=c++11
 LDFLAGS=-lm
 
 all: routescheduling

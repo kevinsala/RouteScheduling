@@ -54,7 +54,7 @@ class Location {
 			_taskDuration = taskDuration;
 		}
 
-		float getMinWindow()
+		float getMinWindow() const
 		{
 			return _minWindow;
 		}
@@ -64,7 +64,7 @@ class Location {
 			_minWindow = minWindow;
 		}
 
-		float getMaxWindow()
+		float getMaxWindow() const
 		{
 			return _maxWindow;
 		}

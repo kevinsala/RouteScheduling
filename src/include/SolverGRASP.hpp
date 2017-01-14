@@ -51,23 +51,21 @@ class SolverGRASP : public Solver {
 			return &(*it);
 		}
 
-		Solution greedyRandomizedConstruction( Configuration &config, Problem &problem, float &itElapsedEvalTime, int &itEvalCandidates )
+		Solution greedyRandomizedConstruction( Configuration &config, Problem &problem, double &itElapsedEvalTime, long long &itEvalCandidates )
 		{
 			Solution solution( problem );
 			itElapsedEvalTime = 0.0;
 			itEvalCandidates = 0;
 
-			std::list<Location> locations = problem.getTaskLocationList();
-			locations.sort( Location::compareByMinWindowDescending );
+			std::vector<Location> &locations
+				= problem.getTaskLocationsSortedByMinWindowDescending();
 
 			std::list<Assignment> candidateList;
-			float elapsedEvalTime = 0.0;
-			int evalCandidates = 0;
+			double elapsedEvalTime = 0.0;
+			long long evalCandidates = 0;
 
 			std::list<Location>::iterator locIt;
-			for ( locIt = locations.begin(); locIt != locations.end(); ++locIt ) {
-				Location &location = *locIt;
-
+			for ( Location &location : locations ) {
 				std::list<Assignment> candidateList =
 					solution.findFeasibleAssignments( location.getId(), elapsedEvalTime, evalCandidates );
 				itElapsedEvalTime += elapsedEvalTime;
@@ -95,15 +93,15 @@ class SolverGRASP : public Solver {
 
 			std::clock_t startTime = clock();
 
-			float totalElapsedEvalTime = 0.0;
-			float itElapsedEvalTime = 0.0;
-			int totalEvalCandidates = 0;
-			int itEvalCandidates = 0;
-			int iteration = 0;
+			double totalElapsedEvalTime = 0.0;
+			double itElapsedEvalTime = 0.0;
+			long long totalEvalCandidates = 0;
+			long long itEvalCandidates = 0;
+			long long iteration = 0;
 
 			LocalSearch localSearch( config );
 
-			while ( ((float)(clock() - startTime)) / CLOCKS_PER_SEC < config.maxExecTime ) {
+			while ( ((double)(clock() - startTime)) / CLOCKS_PER_SEC < config.maxExecTime ) {
 				iteration += 1;
 
 				float originalAlpha = config.alpha;
@@ -125,9 +123,9 @@ class SolverGRASP : public Solver {
 				}
 			}
 
-			float avgEvalTimePerCandidate = 0;
+			double avgEvalTimePerCandidate = 0;
 			if ( totalEvalCandidates != 0 )
-				avgEvalTimePerCandidate = 1000.0 * totalElapsedEvalTime / float(totalEvalCandidates);
+				avgEvalTimePerCandidate = 1000.0 * totalElapsedEvalTime / double(totalEvalCandidates);
 
 			std::cout << "GRASP Candidate Evaluation Performance:" << std::endl;
 			std::cout << "	Number Candidates Evaluated: " << totalEvalCandidates << std::endl;
