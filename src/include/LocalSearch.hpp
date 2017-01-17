@@ -19,7 +19,7 @@ class LocalSearch {
 		// TODO: LocalSearch::run
 		Solution run( Solution &solution )
 		{
-			return Solution( solution.getProblem() );
+			return Solution( solution );
 		}
 
 		// TODO: LocalSearch::printPerformance
