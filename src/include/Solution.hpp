@@ -104,6 +104,11 @@ class Solution {
 			return _arrive;
 		}
 
+		float getLastArrivingTimeAtStart()
+		{
+			return _arrive[_problem->getStartLocationId()];
+		}
+
 		int getPrevLocation( Location &location )
 		{
 			return _prev[location.getId()];

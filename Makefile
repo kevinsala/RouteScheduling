@@ -4,6 +4,11 @@ CPPFLAGS=
 CXXFLAGS=-O3 -g0 -std=c++11
 LDFLAGS=-lm
 
+VERBOSE?=no
+ifeq ($(VERBOSE),yes)
+CPPFLAGS+=-DVERBOSE
+endif
+
 all: routescheduling instancegenerator
 
 instancegenerator: src/InstanceGenerator.cpp

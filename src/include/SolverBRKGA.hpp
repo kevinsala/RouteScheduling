@@ -57,11 +57,12 @@ class SolverBRKGA : public Solver {
 			if ( info.totalDecodedIndividuals != 0 )
 				avgDecodingTimePerIndividual = 1000.0 * info.totalDecodingTime / double(info.totalDecodedIndividuals);
 
+#ifdef VERBOSE
 			std::cout << "BRKGA Individual Decoder Performance:" << std::endl;
 			std::cout << "	Number Individuals Decoded: " << info.totalDecodedIndividuals << std::endl;
 			std::cout << "	Total Decoding Time: " << info.totalDecodingTime << "s" << std::endl;
 			std::cout << "	Average Time / Individual: " << avgDecodingTimePerIndividual << "ms" << std::endl;
-
+#endif
 			return info.bestSolution;
 		}
 };

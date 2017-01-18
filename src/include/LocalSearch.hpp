@@ -103,10 +103,12 @@ class LocalSearch {
 			if ( _iterations != 0 )
 				avgEvalTimePerIteration = 1000.0 * _elapsedTime / double(_iterations);
 
+#ifdef VERBOSE
 			std::cout << "Local Search Performance:" << std::endl;
 			std::cout << "	Number Iterations Evaluated: " << _iterations << std::endl;
 			std::cout << "	Total Evaluation Time: " << _elapsedTime << std::endl;
 			std::cout << "	Average Time / Iteration: " << avgEvalTimePerIteration << std::endl;
+#endif
 		}
 };
 

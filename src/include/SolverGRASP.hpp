@@ -132,11 +132,12 @@ class SolverGRASP : public Solver {
 			if ( totalEvalCandidates != 0 )
 				avgEvalTimePerCandidate = 1000.0 * totalElapsedEvalTime / double(totalEvalCandidates);
 
+#ifdef VERBOSE
 			std::cout << "GRASP Candidate Evaluation Performance:" << std::endl;
 			std::cout << "	Number Candidates Evaluated: " << totalEvalCandidates << std::endl;
 			std::cout << "	Total Evaluated Time: " << totalElapsedEvalTime << "s" << std::endl;
 			std::cout << "	Average Time / Candidate: " << avgEvalTimePerCandidate << "ms" << std::endl;
-
+#endif
 			localSearch.printPerformance();
 
 			return bestSolution;

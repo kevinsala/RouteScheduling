@@ -56,6 +56,13 @@ int main(int argc, char * argv[])
 			Decoder decoder( config, problem );
 			solution = solver.solve( config, problem, decoder );
 		}
+
+		if ( solution.isFeasible() ) {
+			std::cout << "Objective function: " << solution.getObjFunction() << std::endl;
+			std::cout << "NCars: " << solution.getNCars() << std::endl;
+			std::cout << "Last arrive: " << solution.getLastArrivingTimeAtStart() << std::endl << std::endl;
+		}
+		else std::cout << "This instance seems infeasible" << std::endl;
 	}
 	else {
 		std::cerr << "This instance is infeasible" << std::endl;
