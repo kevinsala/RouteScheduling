@@ -41,14 +41,15 @@ class Configuration {
 		{
 		}
 
-		void load(std::string configFilename)
+		void load( std::string configFilename, std::string inputFilename, std::string solutionFilename )
 		{
 			if ( !_config_loaded && !configFilename.empty() ) {
 				boost::property_tree::read_info( configFilename, _config_tree );
 				_config_loaded = true;
 
-				inputDataFile =        _config_tree.get<std::string>("inputDataFile");
-				solutionFile =         _config_tree.get<std::string>("solutionFile");
+				inputDataFile = inputFilename;
+				solutionFile = solutionFilename;
+
 				solver =               _config_tree.get<std::string>("solver");
 				maxExecTime =          _config_tree.get<int>("maxExecTime");
 

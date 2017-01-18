@@ -161,6 +161,76 @@ class Solution {
 			return bestAssig;
 		}
 
+		Assignment getAssignment( int location )
+		{
+			return Assignment( location, _prev[location], _next[location], 0.0 );
+		}
+
+		std::vector<Assignment> getLocationAssignments()
+		{
+			std::vector<Location> &locations = _problem->
+				getTaskLocationsSortedByMinWindowDescending();
+			std::vector<Assignment> assigs( locations.size() );
+
+			for ( int i = 0; i < locations.size(); ++i )
+				assigs[i] = getAssignment( locations[i].getId() );
+
+			return assigs;
+		}
+
+		std::vector<Assignment> getLocationAssignmentsSortedByPathLength()
+		{
+			int nLocations = _problem->getNLocations();
+			int start = _problem->getStartLocationId();
+			std::vector< std::pair<int,float> > locs_and_paths;
+			std::vector<Assignment> assigs( nLocations - 1 );
+
+			for ( int i = 0; i < nLocations; ++i ) {
+				if ( _startPrev[i] ) {
+					float arrive = _startArrive[i];
+					int location = i;
+					assert( location != start);
+
+					while ( location != start ) {
+						assert(location != EMPTY);
+						locs_and_paths.emplace_back( location, arrive );
+						location = _prev[location];
+					}
+				}
+			}
+
+			assert(locs_and_paths.size() == nLocations-1);
+			std::sort( locs_and_paths.begin(), locs_and_paths.end(), compareByPathLength );
+			for ( int i = 0; i < nLocations - 1; ++i )
+				assigs[i] = getAssignment( locs_and_paths[i].first );
+
+			return assigs;
+		}
+
+		static bool compareByPathLength( const std::pair<int,float> &first, const std::pair<int,float> &second )
+		{
+			return first.second > second.second;
+		}
+
+		std::vector< std::pair<int,int> > getCurrentEdges()
+		{
+			int nLocations = _problem->getNLocations();
+			int start = _problem->getStartLocationId();
+			std::vector< std::pair<int,int> > assigs;
+
+			for ( int i = 0; i < nLocations; ++i ) {
+				assert( _next[i] != EMPTY );
+				assigs.emplace_back( i, _next[i] );
+			}
+
+			for ( int i = 0; i < nLocations; ++i ) {
+				if ( _startNext[i] != EMPTY )
+					assigs.emplace_back( start, i );
+			}
+
+			return assigs;
+		}
+
 		bool assign( Assignment &assignment )
 		{
 			if ( !isFeasibleToAssignLocation( assignment ) )
