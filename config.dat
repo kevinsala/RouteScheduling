@@ -1,7 +1,7 @@
 ; --- Common specific parameters ------------------------------------------------------------------------------
 inputDataFile			input.dat				; Input DAT file
 solutionFile			solution.sol			; Output DAT file (solution)
-solver					BRKGA					; Supported solvers: Greedy / GRASP / BRKGA
+solver					GRASP					; Supported solvers: Greedy / GRASP / BRKGA
 maxExecTime				120						; Maximum execution time in seconds
 
 ; --- Greedy specific parameters ------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ BRKGA {
 ; --- Local Search specific parameters ------------------------------------------------------------------------
 ; Ignored if solver is not Greedy or GRASP.
 
-localSearch				true					; Enable local search?
+localSearch				false					; Enable local search?
 {
 	neighborhoodStrategy	Exchange				; Supported Neighborhoods: Reassignment / Exchange
 	policy					BestImprovement			; Supported Policies: BestImprovement / FirstImprovement

@@ -99,7 +99,7 @@ class SolverGRASP : public Solver {
 			long long itEvalCandidates = 0;
 			long long iteration = 0;
 
-			LocalSearch localSearch( config );
+			LocalSearch localSearch( config, problem );
 
 			while ( ((double)(clock() - startTime)) / CLOCKS_PER_SEC < config.maxExecTime ) {
 				iteration += 1;
