@@ -14,14 +14,27 @@
 int main(int argc, char * argv[])
 {
 	std::string configFilename;
+	std::string inputFilename;
+	std::string solutionFilename;
+
+	if ( argc != 1 && argc != 4 ) {
+		std::cout << "USAGE: " << argv[0] << " [configfile inputfile solutionfile]" << std::endl;
+		exit( 1 );
+	}
 
 	if ( argc > 1 ) {
 		configFilename = argv[1];
+		inputFilename = argv[2];
+		solutionFilename = argv[3];
 	}
-	else configFilename = "config.dat";
+	else {
+		configFilename = "config.dat";
+		inputFilename = "input.dat";
+		solutionFilename = "solution.dat";
+	}
 
 	Configuration config;
-	config.load( configFilename );
+	config.load( configFilename, inputFilename, solutionFilename );
 
 	InputData inputData;
 	inputData.load( config.inputDataFile );

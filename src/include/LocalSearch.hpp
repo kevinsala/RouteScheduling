@@ -33,6 +33,11 @@ class LocalSearch {
 		{
 		}
 
+		bool isEnabled()
+		{
+			return _enabled;
+		}
+
 		// TODO: LocalSearch::exploreNeighborhood
 		Solution exploreNeighborhood( Solution &solution )
 		{

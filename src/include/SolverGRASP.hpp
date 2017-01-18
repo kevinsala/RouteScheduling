@@ -2,6 +2,7 @@
 #define SOLVER_GRASP_HPP
 
 #include <cstdlib>
+#include <time.h>
 #include <ctime>
 #include <list>
 
@@ -93,6 +94,9 @@ class SolverGRASP : public Solver {
 
 			std::clock_t startTime = clock();
 
+			// Sets the seed
+			srand( time(NULL) );
+
 			double totalElapsedEvalTime = 0.0;
 			double itElapsedEvalTime = 0.0;
 			long long totalEvalCandidates = 0;
@@ -114,7 +118,8 @@ class SolverGRASP : public Solver {
 				if ( iteration == 1 ) config.alpha = originalAlpha;
 				if ( !solution.isFeasible() ) continue;
 
-				solution = localSearch.run( solution );
+				if ( localSearch.isEnabled() )
+					solution = localSearch.run( solution );
 
 				float solutionObjFunction = solution.getObjFunction();
 				if ( solutionObjFunction < bestObjFunction ) {
