@@ -4,7 +4,10 @@ CPPFLAGS=
 CXXFLAGS=-O3 -g0 -std=c++11
 LDFLAGS=-lm
 
-all: routescheduling
+all: routescheduling instancegenerator
+
+instancegenerator: src/InstanceGenerator.cpp
+	$(CXX) -o bin/$@ $^
 
 routescheduling: Main.o
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o bin/$@ $(addprefix obj/,$^)
