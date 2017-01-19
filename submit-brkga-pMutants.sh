@@ -1,14 +1,14 @@
 #!/bin/bash
 
-configdir="config/grasp/alpha"
+configdir="config/brkga/pMutants"
 bin="bin/routescheduling"
 
 solutionfile="solution.dat"
 
-alphas="0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0"
-for alpha in $alphas; do
-	configfile="${configdir}/config.grasp.alpha.${alpha}.dat"
-	echo "GRASP ALPHA = $alpha"
+pMutantsValues="0.1 0.15 0.2 0.4"
+for pMutants in $pMutantsValues; do
+	configfile="${configdir}/config.brkga.pMutants.${pMutants}.dat"
+	echo "BRKGA pMutants = $pMutants"
 	echo "---------------------------"
 
 	for locs in 8 16 32 64; do
