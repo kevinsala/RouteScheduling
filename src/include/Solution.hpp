@@ -224,8 +224,10 @@ class Solution {
 			std::vector< std::pair<int,int> > assigs;
 
 			for ( int i = 0; i < nLocations; ++i ) {
-				assert( _next[i] != EMPTY );
-				assigs.emplace_back( i, _next[i] );
+				if ( i != start ) {
+					assert( _next[i] != EMPTY );
+					assigs.emplace_back( i, _next[i] );
+				}
 			}
 
 			for ( int i = 0; i < nLocations; ++i ) {
