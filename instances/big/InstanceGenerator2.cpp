@@ -37,17 +37,13 @@ int main( int argc, char **argv )
 		int y = rand() % (MAXCOORD + 1);
 		points[i] = std::pair<int,int>( x, y );
 		task[i] = 20 + rand() / (RAND_MAX/(60 - 20));
-		minWindow[i] = 100 + rand() / (RAND_MAX/(300 - 100));
+		minWindow[i] = 120 + rand() / (RAND_MAX/(280 - 120));
 		maxWindow[i] = 400 + rand() / (RAND_MAX/(650 - 400));
 	}
 
 	for (int i = 0; i < nLocations; ++i) {
 		for (int j = 0; j < nLocations; ++j) {
 			dist[i][j] = sqrt(pow(points[i].first-points[j].first,2) + pow(points[i].second-points[j].second,2));
-			if ( i != j && dist[i][j] == 0 ) {
-				std::cout << "One of the points is duplicated" << std::endl;
-				exit( 1 );
-			}
 		}
 	}
 

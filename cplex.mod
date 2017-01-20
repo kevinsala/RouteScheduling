@@ -1,14 +1,3 @@
-/*********************************************
- * OPL 12.6.0.0 Model
- * Author: ksala
- * Creation Date: 02/01/2017 at 09:59:14
- *********************************************/
-/*********************************************
- * OPL 12.6.0.0 Model
- * Author: ksala
- * Creation Date: 29/12/2016 at 20:36:45
- *********************************************/
-
  int nLocations = ...;
  int ls = ...;
  int fromPoints = ...;
@@ -17,9 +6,9 @@
  
  int points[i in L][x in 1..2] = ...;
  float dist[i in L][j in L] = ...;
- int t[l in L] = ...;
- int minWin[l in L] = ...;
- int maxWin[l in L] = ...;
+ float t[l in L] = ...;
+ float minWin[l in L] = ...;
+ float maxWin[l in L] = ...;
  
  dvar boolean travel[i in L][j in L];
  dvar float+ arrive[l in L];
@@ -35,6 +24,10 @@
  	 		}
  	 	}
  	 }
+ }
+ 
+ execute PARAMS {
+ 	cplex.trelim = 5500;
  }
  
  minimize 720 * ncars + arrive[ls];
@@ -75,6 +68,7 @@
  
  execute {
  	writeln("We need " + ncars + " cars and the last one arrives at " + arrive[ls]);
+ 	writeln("Objective function " + (720 * ncars + arrive[ls]));
  	
  	for (var i = 1; i <= nLocations; i++) {
  		if (travel[ls][i] == 1) {
@@ -98,7 +92,9 @@
  					writeln("1");
  				}
  				else {
- 					if (arrive[next] > maxWin[next] || arrive[next] < minWin[next]) writeln("Error! Time window not satisfied!");
+ 					if (arrive[next] > maxWin[next] || arrive[next] < minWin[next]) {
+ 						writeln("Error! Time window not satisfied!");
+    				}
  					else write(next + " (" + arrive[next] + ") -> ");
  				}
  				prev = next;

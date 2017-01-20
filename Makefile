@@ -1,7 +1,8 @@
 CXX=g++
 
+BOOSTDIR=
 CPPFLAGS=
-CXXFLAGS=-O3 -g0 -std=c++11
+CXXFLAGS=-O3 -g0 -std=c++11 $(BOOSTDIR)
 LDFLAGS=-lm
 
 VERBOSE?=no

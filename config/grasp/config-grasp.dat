@@ -1,6 +1,6 @@
 ; --- Common specific parameters ------------------------------------------------------------------------------
 solver					GRASP					; Supported solvers: Greedy / GRASP / BRKGA
-maxExecTime				120						; Maximum execution time in seconds
+maxExecTime				300						; Maximum execution time in seconds
 
 ; --- Greedy specific parameters ------------------------------------------------------------------------------
 ; Does not has specific parameters
@@ -17,10 +17,10 @@ GRASP {
 ; --- BRKGA specific parameters -------------------------------------------------------------------------------
 ; Ignored if solver is not BRKGA.
 BRKGA {
-	fIndividuals			1.0						; Multiplication factor to compute number of individuals.
-													; numIndividuals = fIndividuals * numTasks
-	pElites					0.20					; % of elites in the population.
-	pMutants				0.15					; % of mutants in the population.
+	fIndividuals			1.5						; Multiplication factor to compute number of individuals.
+													; numIndividuals = fIndividuals * numTaskLocations
+	pElites					0.40					; % of elites in the population.
+	pMutants				0.20					; % of mutants in the population.
 	pInheritanceElite		0.7						; Prob. of inheriting genes from the elite parent in a cross-over
 }
 
@@ -29,6 +29,6 @@ BRKGA {
 
 localSearch				true					; Enable local search?
 {
-	neighborhoodStrategy	Reassignment			; Supported Neighborhoods: Reassignment / Exchange
-	policy					BestImprovement			; Supported Policies: BestImprovement / FirstImprovement
+	neighborhoodStrategy	Exchange				; Supported Neighborhoods: Reassignment / Exchange
+	policy					FirstImprovement			; Supported Policies: BestImprovement / FirstImprovement
 }

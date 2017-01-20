@@ -15,8 +15,11 @@ for strategy in $strategies; do
 
 		for locs in 8 16 32 64; do
 			echo "Problem size: $locs locations"
-			inputfile="instances/input${locs}locs.mh.dat"
-			./$bin $configfile $inputfile $solutionfile
+			for repeat in $(seq 4); do
+				inputfile="instances/input${locs}locs.mh.dat"
+				./$bin $configfile $inputfile $solutionfile
+			done
+			echo
 		done
 	done
 	echo

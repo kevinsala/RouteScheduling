@@ -30,5 +30,5 @@ BRKGA {
 localSearch				true					; Enable local search?
 {
 	neighborhoodStrategy	Reassignment				; Supported Neighborhoods: Reassignment / Exchange
-	policy					BestImprovement			; Supported Policies: BestImprovement / FirstImprovement
+	policy					FirstImprovement			; Supported Policies: BestImprovement / FirstImprovement
 }
